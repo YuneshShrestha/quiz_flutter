@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/question.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +27,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   var _questionNumber = 0;
-  final List<String> _question = ['Who are you?', 'What\'s your name'];
+  List<String> question = ['Who are you?', 'What\'s your name'];
   void _pressed() {
     setState(() {
       _questionNumber += 1;
@@ -41,8 +42,8 @@ class _HomeState extends State<Home> {
       ),
       body: Column(
         children: [
-          Text(_question[_questionNumber].toString()),
-          RaisedButton(child: Text('Press'), onPressed: _pressed)
+          Question(question: question[_questionNumber].toString()),
+          RaisedButton(child: const Text('Press'), onPressed: _pressed)
         ],
       ),
     );
