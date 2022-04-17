@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
-  const Result({Key? key}) : super(key: key);
+  final int? totalPoints;
+  final VoidCallback? restart;
+  const Result({this.totalPoints, this.restart, Key? key}) : super(key: key);
+  String get getResultText {
+    if (totalPoints! < 0) {
+      return 'Try Next Time';
+    } else {
+      return 'Eureka!!!';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Eureka"),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            getResultText,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          Text("Your score is $totalPoints"),
+          FlatButton(
+              onPressed:restart,
+              child: const Text("Restart Game",
+                  style: TextStyle(
+                    color: Colors.blue,
+                  )))
+        ],
+      ),
     );
   }
 }

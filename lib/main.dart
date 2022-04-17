@@ -29,20 +29,64 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var _questionNumber = 0;
+  var _totalpoints = 0;
   static const _question = [
     {
       'question': 'Who is Monalisa?',
-      'answers': ['Painting', 'Queen', 'Dancer', 'Singer']
+      'answers': [
+        {
+          'answer': 'Painting',
+          'points': 10,
+        },
+        {
+          'answer': 'Queen',
+          'points': 0,
+        },
+        {
+          'answer': 'Dancer',
+          'points': 0,
+        },
+        {
+          'answer': 'Singer',
+          'points': 0,
+        },
+      ]
     },
     {
       'question': 'Air plane is also called?',
-      'answers': ['Aeroplane', 'Space Ship', 'Bus', 'Car']
+      'answers': [
+        {
+          'answer': 'Bus',
+          'points': 0,
+        },
+        {
+          'answer': 'Aeroplane',
+          'points': 10,
+        },
+        {
+          'answer': 'Train',
+          'points': 0,
+        },
+        {
+          'answer': 'Spaceship',
+          'points': 0,
+        },
+      ]
     }
   ];
-  void pressed() {
+  void _pressed(int points) {
+    _totalpoints += points;
     setState(() {
       _questionNumber += 1;
+
       // print('Hello ${_questionNumber.toString()}');
+    });
+  }
+
+  void _restart() {
+    setState(() {
+      _totalpoints = 0;
+      _questionNumber = 0;
     });
   }
 
@@ -50,10 +94,17 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Question"),
+          title: const Text("Quiz App"),
+          centerTitle: true,
         ),
         body: _questionNumber < _question.length
-            ? Quiz(questionNumber: _questionNumber, pressed: pressed, question: _question )
-            : const Result());
+            ? Quiz(
+                questionNumber: _questionNumber,
+                pressed: _pressed,
+                question: _question)
+            : Result(
+                totalPoints: _totalpoints,
+                restart: _restart,
+              ));
   }
 }
