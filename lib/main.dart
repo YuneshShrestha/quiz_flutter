@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/answer.dart';
 import 'package:quiz_app/question.dart';
+import 'package:quiz_app/quiz.dart';
+import 'package:quiz_app/result.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,8 +28,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var questionNumber = 0;
-  List<Map<String, Object>> question = [
+  var _questionNumber = 0;
+  static const _question = [
     {
       'question': 'Who is Monalisa?',
       'answers': ['Painting', 'Queen', 'Dancer', 'Singer']
@@ -39,7 +41,7 @@ class _HomeState extends State<Home> {
   ];
   void pressed() {
     setState(() {
-      questionNumber += 1;
+      _questionNumber += 1;
       // print('Hello ${_questionNumber.toString()}');
     });
   }
@@ -50,24 +52,8 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           title: const Text("Question"),
         ),
-        body: questionNumber < question.length
-            ? Column(
-                children: [
-                  Question(
-                      question:
-                          question[questionNumber]['question'].toString()),
-                  // Answer(pressed:pressed),
-                  // Answer(pressed:pressed),
-                  // ... is a spread operator for adding item to the list rather than list to list
-                  // as List<String> tells dart that  question[questionNumber]['answers'] will always return List of String
-                  ...(question[questionNumber]['answers'] as List<String>)
-                      .map((answer) {
-                    return Answer(pressed, answer);
-                  }).toList()
-                ],
-              )
-            : const Center(
-                child: Text("Eureka"),
-              ));
+        body: _questionNumber < _question.length
+            ? Quiz(questionNumber: _questionNumber, pressed: pressed, question: _question )
+            : const Result());
   }
 }
