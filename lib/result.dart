@@ -5,7 +5,7 @@ class Result extends StatelessWidget {
   final VoidCallback? restart;
   const Result({this.totalPoints, this.restart, Key? key}) : super(key: key);
   String get getResultText {
-    if (totalPoints! < 0) {
+    if (totalPoints! <= 0) {
       return 'Try Next Time';
     } else {
       return 'Eureka!!!';
