@@ -23,12 +23,11 @@ class Result extends StatelessWidget {
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text("Your score is $totalPoints"),
-          FlatButton(
-              onPressed:restart,
-              child: const Text("Restart Game",
-                  style: TextStyle(
-                    color: Colors.blue,
-                  )))
+          TextButton(
+              // here primary means text color
+              style: TextButton.styleFrom(primary: Colors.blue),
+              onPressed: restart,
+              child: const Text("Restart Game"))
         ],
       ),
     );

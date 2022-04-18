@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     // Describes the part of the user interface represented by this widget.
     return const MaterialApp(
       home: Home(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
